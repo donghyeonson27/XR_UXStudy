@@ -1,0 +1,81 @@
+﻿#include "pch-c.h"
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void AngularSizeScalerMake_Start_m87602000892EA159CE3BF70C34E469E1F774B48A (void);
+extern void AngularSizeScalerMake_Update_mA8DEB5B498BD7DE4BCD14A093CB4761ED2638907 (void);
+extern void AngularSizeScalerMake__ctor_mD24EAA0A5686951D601510EF5279DE4A0CF5E17C (void);
+extern void Proxemics_Start_mF168540F17E246EF359B1CD95C870AAC4FEFC5F7 (void);
+extern void Proxemics_Update_mEFBAC43CCF708A7F7076DE0A2FB47091EB61C93A (void);
+extern void Proxemics_ShowCurrentLayout_m6DFAD4A5CD832D2F36D94DE3E540939252BADC43 (void);
+extern void Proxemics_NextStage_m62890AA3F206FF66238C1D9D6A6071168088B7EF (void);
+extern void Proxemics__ctor_m7697750D6CB18A4B305AB4654C2E9380261DC6E3 (void);
+extern void ReadData_StartHaptics_m2E328EFC9C4C89D7B6F7BD03DC51BC11EC312088 (void);
+extern void ReadData_HandlePointerEvent_m695CF92B63CA94DC38CA9F8C2918EDE3A8E9C1BC (void);
+extern void ReadData__ctor_mF98E59E8FCED7649A9C1E5A7C55B1E68F1B57A13 (void);
+extern void Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6 (void);
+extern void Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1 (void);
+static Il2CppMethodPointer s_methodPointers[15] = 
+{
+	AngularSizeScalerMake_Start_m87602000892EA159CE3BF70C34E469E1F774B48A,
+	AngularSizeScalerMake_Update_mA8DEB5B498BD7DE4BCD14A093CB4761ED2638907,
+	AngularSizeScalerMake__ctor_mD24EAA0A5686951D601510EF5279DE4A0CF5E17C,
+	Proxemics_Start_mF168540F17E246EF359B1CD95C870AAC4FEFC5F7,
+	Proxemics_Update_mEFBAC43CCF708A7F7076DE0A2FB47091EB61C93A,
+	Proxemics_ShowCurrentLayout_m6DFAD4A5CD832D2F36D94DE3E540939252BADC43,
+	Proxemics_NextStage_m62890AA3F206FF66238C1D9D6A6071168088B7EF,
+	Proxemics__ctor_m7697750D6CB18A4B305AB4654C2E9380261DC6E3,
+	ReadData_StartHaptics_m2E328EFC9C4C89D7B6F7BD03DC51BC11EC312088,
+	ReadData_HandlePointerEvent_m695CF92B63CA94DC38CA9F8C2918EDE3A8E9C1BC,
+	ReadData__ctor_mF98E59E8FCED7649A9C1E5A7C55B1E68F1B57A13,
+	Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6,
+	Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1,
+};
+static const int32_t s_InvokerIndices[15] = 
+{
+	21415,
+	21415,
+	21415,
+	21415,
+	21415,
+	21415,
+	21415,
+	21415,
+	16269,
+	16393,
+	21415,
+	21415,
+	21415,
+	34952,
+	21415,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
+const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
+{
+	"Assembly-CSharp.dll",
+	15,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

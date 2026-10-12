@@ -28,7 +28,7 @@ public class AngularSizeScalerMake : MonoBehaviour
 
     }
 
-    void LateUpdate()
+    void Update()
     {
         //카메라 자동 지정
         if (viewerCamera == null)
