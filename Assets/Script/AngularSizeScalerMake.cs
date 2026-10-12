@@ -13,7 +13,7 @@ public class AngularSizeScalerMake : MonoBehaviour
     private float baseScale; //목표 크기
 
     //부드러운 변환 애니메이션
-    private float scaleVelocity; //부드러운 속도 정보
+    private float scaleVelocity; //이동 속도 계산 정보
     [SerializeField] private float smoothTime = 0.15f; //접근 속도
 
     void Start()
