@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Targeting.unity
+    path: Assets/Scenes/1_Targeting.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/Scenes/Gaze1.unity
+    path: Assets/Scenes/2_Gaze1.unity
     guid: f9176d8b0c9adf54f935c64fa56deacf
   - enabled: 1
-    path: Assets/Scenes/Gaze2.unity
+    path: Assets/Scenes/2_Gaze2.unity
     guid: e4ea5d8f07aa4304185a5828e6040785
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 368e25d6156cc7d44a4914432b9adecc, type: 2}
