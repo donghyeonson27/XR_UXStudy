@@ -9,8 +9,8 @@ public enum UICondition { Floating, Hand }
 public class TrialManager : MonoBehaviour
 {
     //참가자 설정
-    [SerializeField] private int participantNumber = 1; //홀수 : 플로팅 먼저, 짝수 : 손 UI 먼저
-    [SerializeField] private int trialCount = 9; //조건당 과제 횟수
+    [SerializeField] private int participantNumber = 1; //기록용 참가자 번호
+    [SerializeField] private int trialsPerBlock = 4; //블록당 과제 횟수 (4블록 × 4회 = 조건당 8회)
     [SerializeField] private float restTime = 1f; //과제 사이 쉬는 시간
 
     //연결할 오브젝트
@@ -24,14 +24,16 @@ public class TrialManager : MonoBehaviour
     [SerializeField] private float floatingDistance = 0.4f; //머리 앞 거리
     [SerializeField] private float floatingDrop = 0.2f; //눈높이보다 낮추는 값
 
+    //블록 순서 (ABBA : 플로팅 → 손 → 손 → 플로팅)
+    private UICondition[] order = { UICondition.Floating, UICondition.Hand, UICondition.Hand, UICondition.Floating };
+
     //진행 상태
-    private UICondition[] order; //조건 순서
-    private int conditionStep = -1; //몇 번째 조건인지 (-1 : 시작 전, 0, 1)
-    private bool conditionRunning; //조건 진행 중인지
+    private int block = -1; //몇 번째 블록인지 (-1 : 시작 전, 0 ~ 3)
+    private bool blockRunning; //블록 진행 중인지
     private bool waitingForAnswer; //버튼 입력을 받는 중인지
 
     //과제 기록
-    private int trial; //현재 과제 번호
+    private int trial; //블록 안에서 몇 번째 과제인지
     private int targetIndex; //눌러야 하는 작품 번호
     private int errors; //이번 과제의 오답 횟수
     private float startTime; //지시문이 뜬 시간
@@ -39,14 +41,10 @@ public class TrialManager : MonoBehaviour
 
     void Start()
     {
-        //참가자 번호로 조건 순서 정하기
-        if (participantNumber % 2 == 1) order = new[] { UICondition.Floating, UICondition.Hand };
-        else order = new[] { UICondition.Hand, UICondition.Floating };
-
         //CSV 파일이 없으면 첫 줄(항목 이름) 만들기
         logPath = Path.Combine(Application.persistentDataPath, "select_log.csv");
         if (!File.Exists(logPath))
-            File.AppendAllText(logPath, "participant,order,condition,trial,target,timeSec,errors\n");
+            File.AppendAllText(logPath, "participant,block,condition,trial,target,timeSec,errors\n");
         Debug.Log("저장 위치 : " + logPath);
 
         floatingMenu.gameObject.SetActive(false);
@@ -59,20 +57,21 @@ public class TrialManager : MonoBehaviour
         if (Keyboard.current == null)
             return;
 
-        //Space : 첫 조건 시작
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && conditionStep == -1)
-            BeginCondition(0);
+        //Space : 첫 블록 시작
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && block == -1)
+            BeginBlock(0);
 
-        //N : 첫 조건이 끝난 뒤 다음 조건 시작
-        if (Keyboard.current.nKey.wasPressedThisFrame && conditionStep == 0 && !conditionRunning)
-            BeginCondition(1);
+        //N : 블록이 끝난 뒤 다음 블록 시작
+        bool hasNextBlock = block >= 0 && block < order.Length - 1;
+        if (Keyboard.current.nKey.wasPressedThisFrame && hasNextBlock && !blockRunning)
+            BeginBlock(block + 1);
     }
 
-    //조건 시작
-    void BeginCondition(int step)
+    //블록 시작
+    void BeginBlock(int index)
     {
-        conditionStep = step;
-        UICondition condition = order[step];
+        block = index;
+        UICondition condition = order[block];
 
         //현재 조건 메뉴만 켜기
         floatingMenu.gameObject.SetActive(condition == UICondition.Floating);
@@ -82,7 +81,7 @@ public class TrialManager : MonoBehaviour
             PlaceFloatingMenu();
 
         trial = 0;
-        conditionRunning = true;
+        blockRunning = true;
         NextTrial();
     }
 
@@ -100,9 +99,9 @@ public class TrialManager : MonoBehaviour
     //다음 과제 출제
     void NextTrial()
     {
-        if (trial >= trialCount)
+        if (trial >= trialsPerBlock)
         {
-            EndCondition();
+            EndBlock();
             return;
         }
 
@@ -150,23 +149,22 @@ public class TrialManager : MonoBehaviour
         NextTrial();
     }
 
-    //조건 종료
-    void EndCondition()
+    //블록 종료
+    void EndBlock()
     {
-        conditionRunning = false;
+        blockRunning = false;
         waitingForAnswer = false;
         floatingMenu.gameObject.SetActive(false);
         handMenu.SetActive(false);
 
-        if (conditionStep == 0) prompt.text = "조건 종료";
-        else prompt.text = "종료";
+        if (block == order.Length - 1) prompt.text = "종료";
+        else prompt.text = "잠시 쉬어요";
     }
 
     //CSV에 한 줄 저장
     void WriteLog(float taskTime)
     {
-        string orderText = (order[0] == UICondition.Floating) ? "FH" : "HF"; //F : 플로팅, H : 손 UI
-        string line = $"{participantNumber},{orderText},{order[conditionStep]},{trial},{targetIndex + 1},{taskTime:F3},{errors}";
+        string line = $"{participantNumber},{block + 1},{order[block]},{trial},{targetIndex + 1},{taskTime:F3},{errors}";
         File.AppendAllText(logPath, line + "\n");
     }
 }

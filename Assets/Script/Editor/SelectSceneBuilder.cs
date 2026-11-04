@@ -69,7 +69,7 @@ public static class SelectSceneBuilder
         EditorUtility.DisplayDialog("Select 씬 구성", "완료했어요. Hierarchy를 확인해보세요.", "확인");
     }
 
-    static void RemoveTargetingObjects(UnityEngine.SceneManagement.Scene scene)
+    public static void RemoveTargetingObjects(UnityEngine.SceneManagement.Scene scene)
     {
         string[] names = { "EmptyUIBackplateWithCanvas", "Poke Interaction", "HandRayInteractor" };
         foreach (GameObject root in scene.GetRootGameObjects())
@@ -85,7 +85,7 @@ public static class SelectSceneBuilder
         }
     }
 
-    static void SetupCamera()
+    public static void SetupCamera()
     {
         Transform passthrough = FindInScene("[BuildingBlock] Passthrough");
         if (passthrough != null)
@@ -114,7 +114,7 @@ public static class SelectSceneBuilder
         }
     }
 
-    static TMP_FontAsset GetKoreanFont()
+    public static TMP_FontAsset GetKoreanFont()
     {
         TMP_FontAsset fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontAssetPath);
         if (fontAsset != null)
@@ -136,7 +136,7 @@ public static class SelectSceneBuilder
         return fontAsset;
     }
 
-    static ContentDisplay CreateExhibitScreen()
+    public static ContentDisplay CreateExhibitScreen()
     {
         GameObject screen = GameObject.CreatePrimitive(PrimitiveType.Quad);
         screen.name = "ExhibitScreen";
@@ -228,7 +228,7 @@ public static class SelectSceneBuilder
         UnityEventTools.AddIntPersistentListener(button.onClick, trialManager.OnMenuButton, index);
     }
 
-    static TMP_Text CreateText(Transform parent, string content, float size, TMP_FontAsset font, Color color)
+    public static TMP_Text CreateText(Transform parent, string content, float size, TMP_FontAsset font, Color color)
     {
         GameObject textObject = new GameObject("Text", typeof(RectTransform));
         textObject.transform.SetParent(parent, false);
@@ -250,7 +250,7 @@ public static class SelectSceneBuilder
         return text;
     }
 
-    static void KeepOnlyRightHandPoke()
+    public static void KeepOnlyRightHandPoke()
     {
         foreach (MonoBehaviour component in Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
@@ -278,7 +278,7 @@ public static class SelectSceneBuilder
         return false;
     }
 
-    static Transform FindInScene(string name)
+    public static Transform FindInScene(string name)
     {
         foreach (Transform t in Object.FindObjectsByType<Transform>(FindObjectsInactive.Include, FindObjectsSortMode.None))
         {
@@ -288,7 +288,7 @@ public static class SelectSceneBuilder
         return null;
     }
 
-    static void SetField(Object target, string fieldName, Object value)
+    public static void SetField(Object target, string fieldName, Object value)
     {
         var so = new SerializedObject(target);
         so.FindProperty(fieldName).objectReferenceValue = value;
